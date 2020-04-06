@@ -21,6 +21,7 @@ class CustomTable extends React.Component {
             <Table
                 dataSource={this.props.results}
                 columns={this.props.columnHeaders}
+                pagination={{position:'top'}}
             
             />
         )
