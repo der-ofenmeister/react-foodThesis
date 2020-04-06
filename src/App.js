@@ -1,23 +1,22 @@
 import React ,{Component} from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
-//import CustomTable from './containers/CustomTable';
-//import TableView from './components/TableView';
+import CustomGrid from './containers/CustomGrid';
 import CustomTable from './containers/CustomTable';
 import {connect} from 'react-redux'
+//import { Layout } from 'antd';
+//const { Header, Footer, Content } = Layout;
+
 class App extends Component {
   render(){
   return (
     <div>
-      < CustomTable/>
+     <CustomGrid>
+       <CustomTable/>
+     </CustomGrid>
     </div>
   );
 }}
 
-// mapStateToProps = state =>{
-//   return{
-//     data
-//   }
-// }
 
 export default connect()(App);

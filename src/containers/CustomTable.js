@@ -10,15 +10,18 @@ import { connect } from "react-redux";
 
 
 class CustomTable extends React.Component {
+
+
     componentDidMount() {
         this.props.fetchData()
     }
-
+   
     render() {
         return (
             <Table
                 dataSource={this.props.results}
                 columns={this.props.columnHeaders}
+            
             />
         )
     }
