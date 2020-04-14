@@ -29,7 +29,7 @@ export const fetchData = () => async dispatch => {
             dataIndex: col,
             key: col,
             sorter:true,
-            
+            sortDirections: ['ascend','descend']
         }))
 
         const rows = data.results.map((res, i) => ({

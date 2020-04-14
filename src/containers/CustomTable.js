@@ -9,20 +9,26 @@ import { connect } from "react-redux";
 
 
 
+const sortData = (data) => {
+    // Call slice to create a new Array and prevent mutating it if it's stored in state
+    return data.slice().sort((a, b) => a.myKey - b.myKey);
+ }
+
 class CustomTable extends React.Component {
 
 
     componentDidMount() {
         this.props.fetchData()
     }
-   
+    
     render() {
         return (
             <Table
-                dataSource={this.props.results}
+               pagination= { {position:'top'}}
                 columns={this.props.columnHeaders}
-                pagination={{position:'top'}}
-            
+                
+                dataSource={sortData(this.props.results)}
+                title={() => ''}
             />
         )
     }

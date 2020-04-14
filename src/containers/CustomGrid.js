@@ -39,7 +39,7 @@ class CustomGrid extends React.Component {
           {/* <Divider orientation="center" style={{ color: '#333', fontWeight: 'normal' }}></Divider> */}
 
                 <Row gutter={16}  >
-                    <Col span={5}><div style={style}></div></Col>
+                    <Col span={5}n><div style={style}></div></Col>
                     <Col span={12}></Col>
                     <Col span={7}><div style={style}></div></Col>
                 </Row>
