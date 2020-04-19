@@ -1,44 +1,24 @@
-import { Modal, Button, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
-import Icon from '@ant-design/icons';
+// import Icon from '@ant-design/icons';
 import './ManageColumns.css';
+import CustomModal from "../components/CustomModal"
 
 const { TabPane } = Tabs;
 
 
+
 class ManageColumns extends React.Component {
-    state = { visible: false };
-    showModal = () => {
-        this.setState({
-            visible: true,
-        });
-    };
-
-    handleOk = e => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
-
-    handleCancel = e => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
 
 
     render() {
         return (
             <div>
-                <Button onClick={this.showModal}>Manage Columns</Button>
-                <Modal
+                <CustomModal
+                
+                name="Manage Columns"
                     title="Manage Columns"
-                    visible={this.state.visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
                     okText="Apply Changes"
                 >
                     <Tabs type="card">
@@ -50,12 +30,12 @@ class ManageColumns extends React.Component {
                             }
                         </TabPane>
                         <TabPane tab="Sort Order" key="2">
+                            {/* <p>Content of Tab Pane 2</p>
                             <p>Content of Tab Pane 2</p>
-                            <p>Content of Tab Pane 2</p>
-                            <p>Content of Tab Pane 2</p>
+                            <p>Content of Tab Pane 2</p> */}
                         </TabPane>
                     </Tabs>
-                </Modal>
+                </CustomModal>
             </div>
         )
     }

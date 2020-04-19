@@ -1,45 +1,25 @@
-import { Button, Modal, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
 import { FileZipOutlined } from '@ant-design/icons';
 import './ManageColumns.css';
+import CustomModal from "../components/CustomModal"
 
 const { TabPane } = Tabs;
 
 
 class Export extends React.Component {
-    state = { visible: false };
-    showModal = () => {
-        this.setState({
-            visible: true,
-        });
-    };
-
-    handleOk = e => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
-
-    handleCancel = e => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
+   
 
     render() {
         return (
             <div>
-                <Button onClick={this.showModal}><FileZipOutlined />Export</Button>
-                <Modal
+                <CustomModal
                     title="Download results for query"
-                    visible={this.state.visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
                     okText="Download File"
                     cancelText="Close"
+                    name="Export"
+                    icon={<FileZipOutlined/>}
                 >
                     <Tabs type="card" tabPosition="left">
                         <TabPane tab="Download TSV file" key="1">
@@ -74,7 +54,7 @@ class Export extends React.Component {
                         </TabPane>
                         
                     </Tabs>
-                </Modal>
+                </CustomModal>
             </div>
         )
     }
