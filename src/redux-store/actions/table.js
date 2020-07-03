@@ -6,11 +6,12 @@ export const fetchDataRequest = () => {
         type: actionTypes.FETCH_DATA_REQUEST
     };
 };
-export const fetchDataSuccess = (results, columnHeaders) => {
+export const fetchDataSuccess = (finalFoodData, nutrients, graphData) => {
     return {
         type: actionTypes.FETCH_DATA_SUCCESS,
-        results,
-        columnHeaders
+        finalFoodData,
+        nutrients,
+        graphData,
     };
 };
 export const fetchDataFail = error => {
@@ -20,34 +21,58 @@ export const fetchDataFail = error => {
     };
 };
 
-export const fetchData = () => async dispatch => {
-    dispatch(fetchDataRequest())
-    try {
-        const { data } = await axios.get('https://www.flymine.org/flymine/service/query/results?query=%3Cquery+name%3D%22%22+model%3D%22genomic%22+view%3D%22Gene.description+Gene.length+Gene.name+Gene.primaryIdentifier+Gene.symbol%22+longDescription%3D%22%22+sortOrder%3D%22Gene.description+asc%22%3E%3Cconstraint+path%3D%22Gene%22+op%3D%22IN%22+value%3D%22PL+FlyTF_PWM_TFs%22%2F%3E%3C%2Fquery%3E&format=json&key=F1y7k0Pf68c9y6Xaick3')
-        const columns = data.views.map(col => ({
-            title: col,
-            dataIndex: col,
-            key: col,
-            sorter:true,
-            sortDirections: ['ascend','descend']
-        }))
+export const fetchData = (foodId) => {
 
-        const rows = data.results.map((res, i) => ({
+    return dispatch => {
+        dispatch(fetchDataRequest());
+        axios.get(`https://api.nal.usda.gov/fdc/v1/food/${foodId}?api_key=5WmWiWnw6frEhQjWxqW7sk6MVPvjK9AESeHYUZtP`)
+        .then(res => {
+            const x = res.data;
+            console.log("raw data --->",x);
+            const y = res.data.foodNutrients.length;
+            console.log("food ID ---->", foodId);
+
+            const foodData = [];
+            foodData.push({
+                name: x.description,
+                category: x.foodCategory.description,
+                class: x.foodClass,
+                sciName: x.scientificName,
+                numNutrients: x.foodNutrients.length,
+                id: x.fdcId,
+            })
+
+            const nutrients = [];
+
+            for (let i=0; i < y; i+=1) {
+
+                nutrients.push({
+                    name: x.foodNutrients[i].nutrient.name,
+                    amount: x.foodNutrients[i].amount,
+                    units: x.foodNutrients[i].nutrient.unitName,
+                })
+            }
+
+            const graphData = [];
+
+            for (let i=0; i < y; i+=1) {
+
+                graphData.push({
+                    name: x.foodNutrients[i].nutrient.name,
+                    amount: x.foodNutrients[i].amount,
+                })
+            }
+            const finalFoodData = foodData[0];
+
+            console.log("food data --->", finalFoodData)
+            console.log("nutrients --->", nutrients)
             
-            key: i,
-            ...columns.reduce(
-                (acc, cur, i) => ({
-                    ...acc,
-                    [cur.dataIndex]: res[i],
-                    }),
-                {},
-            ),
-        }
-        ))
-        
-        dispatch(fetchDataSuccess(rows, columns))
-    } catch (error) {
-        dispatch(fetchDataFail(error.message))
-    }
+            dispatch(fetchDataSuccess(finalFoodData, nutrients, graphData));
+        })
+        .catch(err => {
+            dispatch(fetchDataFail(err));
+        });
+    };
+
 }
 

@@ -1,32 +1,30 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../utility';
 const initialState = {
-    graphData: [],
-    finalFoodData:[],
-    nutrients:[],
+    finalFoodSearch:[],
+    searchQuery: null,
     error: null,
     loading: false,
 };
 
 
-const fetchDataRequest = (state, action) => {
+const fetchSearchRequest = (state, action) => {
     return updateObject(state, {
       error: null,
       loading: true
     });
   };
   
-  const fetchDataSuccess = (state, action) => {
+  const fetchSearchSuccess = (state, action) => {
     return updateObject(state, {
-      graphData: action.graphData,
-      finalFoodData: action.finalFoodData,
-      nutrients: action.nutrients,
+      finalFoodSearch: action.finalFoodSearch,
+      searchQuery: action.searchQuery,
       error: null,
       loading: false
     });
 };
   
-  const fetchDataFail = (state, action) => {
+  const fetchSearchFail = (state, action) => {
     return updateObject(state, {
       error: action.error,
       loading: false
@@ -35,12 +33,12 @@ const fetchDataRequest = (state, action) => {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-      case actionTypes.FETCH_DATA_REQUEST:
-        return fetchDataRequest(state, action);
-      case actionTypes.FETCH_DATA_SUCCESS:
-        return fetchDataSuccess(state, action);
-      case actionTypes.FETCH_DATA_FAIL:
-        return fetchDataFail(state, action);
+      case actionTypes.FETCH_SEARCH_REQUEST:
+        return fetchSearchRequest(state, action);
+      case actionTypes.FETCH_SEARCH_SUCCESS:
+        return fetchSearchSuccess(state, action);
+      case actionTypes.FETCH_SEARCH_FAIL:
+        return fetchSearchFail(state, action);
       default:
         return state;
     }

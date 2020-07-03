@@ -18,13 +18,15 @@ class CustomGrid extends React.Component {
     render() {
         return (
             <div>
-
+{/* 
                 <Row gutter={0}>
                     <Col span={24}><div style={style}></div></Col>
 
-                </Row>
-                <Divider orientation="center" style={{ color: '#333', fontWeight: 'normal' }}></Divider>
-                <Row gutter={[0,15]} justify="space-around">
+                </Row> */}
+                <br />
+                <br />
+
+                {/* <Row gutter={[0,15]} >
                     <Col span={3}><ManageColumns/></Col>
                     <Col span={3}><ManageFilters/></Col>
                     <Col span={4}><ManageRelationships/></Col>
@@ -32,27 +34,19 @@ class CustomGrid extends React.Component {
                     <Col span={1}></Col>
                     <Col span={3}><SaveasList/></Col>
                     <Col span={3}><GenerateCode/></Col>
-                    <Col span={2}><Export/></Col>
-                    
-                </Row>
+                    <Col span={2}><Export/></Col>           
+                </Row> */}
 
-          {/* <Divider orientation="center" style={{ color: '#333', fontWeight: 'normal' }}></Divider> */}
-
-                <Row gutter={16}  >
-                    <Col span={5}><div style={style}></div></Col>
-                    <Col span={12}></Col>
-                    <Col span={7}><div style={style}></div></Col>
-                </Row>
-                <Divider orientation="center" style={{ color: '#333', fontWeight: 'normal' }}></Divider>
 
                 <Row >
                     <Col span={24}>{this.props.children}</Col>
                 </Row>
-                <Divider orientation="center" style={{ color: '#333', fontWeight: 'normal' }}></Divider>
 
-                <Row style={style} >
+                {/* <Divider orientation="center" style={{ color: '#333', fontWeight: 'normal' }}></Divider> */}
+
+                {/* <Row style={style} >
                     Footer
-                </Row>
+                </Row> */}
             </div>
         )
     }
